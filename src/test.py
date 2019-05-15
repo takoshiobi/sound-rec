@@ -11,7 +11,7 @@ y2, sr2 = librosa.load('../samples/2.mp3')
 
 # show multiple plots using subplot
 plt.subplot(1, 2, 1)
-mfcc1 = librosa.feature.mfcc(y1,sr1)   #Computing MFCC values
+mfcc1 = librosa.feature.mfcc(y1,sr1)   # compute MFCC values
 librosa.display.specshow(mfcc1)
 
 plt.subplot(1, 2, 2)
