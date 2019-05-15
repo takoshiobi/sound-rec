@@ -1,3 +1,5 @@
 librosa
 dtw
 matplotlib
+numpy
+scipy
