@@ -2,6 +2,7 @@ import librosa
 import librosa.display
 import matplotlib.pyplot as plt
 from dtw import dtw
+%matplotlib inline
 
 #Loading audio files
 y1, sr1 = librosa.load('../samples/1.mp3')
