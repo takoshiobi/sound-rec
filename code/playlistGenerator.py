@@ -11,7 +11,6 @@ counter = 0
 # подгружаем полученные в predictions.py предсказания
 predictions = joblib.load('predictions.data')
 rockPredictions = joblib.load('extraRock.prediction')
-userPredictions = joblib.load('UserChosenSongs.prediction')
 
 # сопоставляем полученные предсказания с названиями треков
 with open('songTitles.txt') as f:
@@ -51,7 +50,7 @@ for key, value in songLibrary.iteritems():
     # создаем пару: дистанция-название_композиции и добавляем эту пару в словарь topSongs
     topSongs[key] = dist
 
-# сортируем треки в массиве по величине дистанции, от самой маленькой (наиболее похожие) до самой большой
+# сортируем треки в словаре по величине дистанции, от самой маленькой (наиболее похожие) до самой большой (наименее похожие)
 sortedSongs = sorted(topSongs.items(), key=operator.itemgetter(1))
 # берем первые 10 треков с самыми маленькими дистанциями между ними и эталонным треком
 sortedSongs = sortedSongs[:10]
