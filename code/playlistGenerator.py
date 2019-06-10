@@ -3,6 +3,9 @@ from sklearn.externals import joblib
 from math import *
 import operator
 
+"""
+Предсказание (массив чисел) это вектор, который представляет распределения вероятностей списка потенциальных результатов.
+"""
 # словарь, где будут храниться пары: песня-предсказание (типы данных: строка-массив)
 # пример: {Был-пацан.mp3: [1,1,0,1,...], ...}
 songLibrary = {}
@@ -31,7 +34,7 @@ with open('incubus.txt') as f:
 querySong = "Cocoa Butter Kisses (ft Vic Mensa & Twista) (Prod by Cam for JUSTICE League & Peter Cottont (DatPiff Exclusive)"
 
 # получаем массив со спектрограммой соответствующей анализируемой песне
-# элементы в массиве predictions в данном случае представляют собой хз что
+# элементы в массиве predictions в данном случае представляют собой векторы распределения вероятностей
 querySongData = songLibrary[querySong]
 
 # удаляем анализируемую песню из словаря, чтобы не было дубликатов 
