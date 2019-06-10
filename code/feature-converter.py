@@ -71,9 +71,10 @@ def extract_features(basedir,extension='.au'):
     :return: tuple of array of features (first item), and ...
     :rtype: tuple
     """
-    # массив со спектрограммами 
+    # массив со спектрограммами которые представляют собой числовые массивы
     features=[]
-    # массив чисел 
+    # массив чисел в который мы почему-то добавляем жанры в этом файле, хотя в других файлах lables это метки,
+    # а не жанры. дичь.
     labels=[]
 
     # iterate over all files in all subdirectories of the base directory
@@ -133,19 +134,19 @@ def extract_features(basedir,extension='.au'):
 
                 # получаем номер жанра соответсвенно genreDict 
                 label = genreDict.get(genre)
-                # и добавляем его в массив с жанрами labels
+                # и добавляем его в массив с номерами жанров labels
                 labels.append(label)
             else:
                 pass
 
-    # изменяем форму массива для того, чтобы получить данные пригодные для последующей обработки программой
+    # изменяем форму массива features для того, чтобы получить данные пригодные для последующей обработки программой
     # например 
     # > features = [1,2,3,3]
     # > features = np.asarray(features)
     # > features
     # > array([1, 2, 3, 3])   
     # reshape меняет форму массива на (4, 82432)
-    # ((( для матрицы из n строк и m столбов, shape будет (n,m) )))
+    # ((( для матрицы из n строк и m столбцов, shape будет (n,m) )))
     # features = [[1,2, ... 82432], [1,2, ... 82432], [1,2, ... 82432], [1,2, ... 82432]]    
     # почему 82432
     # потому что оно делится без остатка на 128 и 644 (форма массива log_mel_spec строка 125) 
@@ -161,18 +162,19 @@ def extract_features(basedir,extension='.au'):
     #       [0., 1., 1., 0.]])
     # >>> result.shape
     # (4, 4)
+    # что означает что в 2д массиве 4 колонки и 4 столбца
     print features.shape
 
     # выводим в консоль длину массива labels 
     print len(labels)
 
     # features: массив спектрограмм (числовой 2д массив)
-    # one_hot_encode(labels): массив жанров (тоже числовой 2д массив)
+    # one_hot_encode(labels): массив меток жанров (тоже числовой 2д массив)
     return (features, one_hot_encode(labels))
 
 def one_hot_encode(labels,num_classes=4):
     """
-    Меняет форму числового массива жанров  
+    Меняет форму числового массива жанров, видимо чтобы сделать из них нормальные метки
 
     :labels (массив из чисел): список жанров
     :num_classes (число): количество каких-то классов
@@ -219,7 +221,7 @@ if __name__ == "__main__":
     train_data, train_labels = extract_features(trainingPath)
 
     # store preprocessed data in serialised format so we can save computation time and power
-    # создает и пишет в два отдельных файла, один со спектрограммами, а другой с жанрами
+    # создает и пишет в два отдельных файла, один со спектрограммами, а другой с метками
     with open('../../4GenreTest.data', 'w') as f:
         pickle.dump(train_data, f)
 
