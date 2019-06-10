@@ -33,7 +33,7 @@ with open('incubus.txt') as f:
 # берем одну из песен великолепной группы incubus и ищем топ 10 самых похожих на неё в созданном ранее словаре songLibrary
 querySong = "Cocoa Butter Kisses (ft Vic Mensa & Twista) (Prod by Cam for JUSTICE League & Peter Cottont (DatPiff Exclusive)"
 
-# получаем массив со спектрограммой соответствующей анализируемой песне
+# получаем массив с распределением вероятностей соответствующий анализируемой песне
 # элементы в массиве predictions в данном случае представляют собой векторы распределения вероятностей
 querySongData = songLibrary[querySong]
 
