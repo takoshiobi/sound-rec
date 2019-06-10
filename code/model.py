@@ -43,6 +43,7 @@ def getBatch(data, labels, batchSize, iteration):
         dataBatch = np.vstack((data[startOfBatch:],data[:endOfBatch]))
         labelsBatch = np.vstack((labels[startOfBatch:],labels[:endOfBatch]))
 
+        # вернет необходимеые для обучения массивы с метками и со спектрами    
         return dataBatch, labelsBatch
 
 
