@@ -3,7 +3,7 @@ from sklearn.externals import joblib
 from math import *
 import operator
 
-# словарь, где будут храниться пары: песня-мел_спектрограмма_этой_песни (типы данных: строка-массив)
+# словарь, где будут храниться пары: песня-предсказание (типы данных: строка-массив)
 # пример: {Был-пацан.mp3: [1,1,0,1,...], ...}
 songLibrary = {}
 counter = 0
@@ -32,7 +32,7 @@ with open('incubus.txt') as f:
 querySong = "Cocoa Butter Kisses (ft Vic Mensa & Twista) (Prod by Cam for JUSTICE League & Peter Cottont (DatPiff Exclusive)"
 
 # получаем массив со спектрограммой соответствующей анализируемой песне
-# элементы в массиве predictions в данном случае представляют собой мел спектрограмму трека 
+# элементы в массиве predictions в данном случае представляют собой хз что
 querySongData = songLibrary[querySong]
 
 # удаляем анализируемую песню из словаря, чтобы не было дубликатов 
