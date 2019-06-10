@@ -35,34 +35,33 @@ querySong = "Cocoa Butter Kisses (ft Vic Mensa & Twista) (Prod by Cam for JUSTIC
 # элементы в массиве predictions в данном случае представляют собой мел спектрограмму трека 
 querySongData = songLibrary[querySong]
 
+# удаляем анализируемую песню из словаря, чтобы не было дубликатов 
 del songLibrary[querySong]
-# del songLibrary['Big Sean - How It Feel (Lyrics)']
-# del songLibrary['The Game - Ali Bomaye (Explicit) ft. 2 Chainz, Rick Ross']
-# del songLibrary['Kendrick Lamar - Money Trees (HD Lyrics)']
-# del songLibrary['Faint (Official Video) - Linkin Park']
-# del songLibrary['Wale-Miami Nights (Ambition)']
-# del songLibrary['Wale - Bad Girls Club Ft. J Cole Official Video']
-# 3. find top 10 closest songs
 
-# 
+# находим топ 10 похожих песен
+
+# инициализируем словарь, куда будем грузить похожие песни
 topSongs = {}
 
+# обходим каждый элемент словаря в цикле
 for key, value in songLibrary.iteritems():
-    # calculate distance
+    # считаем дистанцию между треком, для которого ищем похожие и каждым треком, записанным в словарь songLibrary
+    # метод linalg.norm: возвращает норму матрицы или вектора
     dist = np.linalg.norm(querySongData-songLibrary[key])
-    # store in distance directory
+    # создаем пару: дистанция-название_композиции и добавляем эту пару в словарь topSongs
     topSongs[key] = dist
 
-# order top songs by distance
+# сортируем треки в массиве по величине дистанции, от самой маленькой (наиболее похожие) до самой большой
 sortedSongs = sorted(topSongs.items(), key=operator.itemgetter(1))
-# take top 10 closest songs
+# берем первые 10 треков с самыми маленькими дистанциями между ними и эталонным треком
 sortedSongs = sortedSongs[:10]
 
+# очередной бесполезный вывод в консоль
 for value in sortedSongs:
     print value
 
 
-# for visualisation get coordinates of top 10 songs
+# получаем координаты первых 10 песен для дальнейшей визуализации 
 topSongDistances = {}
 for val in sortedSongs:
 
